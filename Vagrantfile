@@ -39,6 +39,7 @@ Vagrant.configure("2") do |config|
         node_config.vm.provision "ansible" do |ansible|
           ansible.playbook = "ansible/playbook.yml"
           ansible.limit = "all"
+          ansible.compatibility_mode = "2.0"
           
           # Vagrant auto-generates inventory, we just define groups and host_vars
           ansible.groups = {
