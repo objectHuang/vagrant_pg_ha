@@ -1,0 +1,51 @@
+# Vagrant
+.vagrant/
+*.box
+vagrant.log
+
+# Ansible
+*.retry
+ansible/*.retry
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-*
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+logs/
+
+# SSH keys (never commit these!)
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+
+# Temp files
+*.tmp
+*.temp
+*.bak
