@@ -150,16 +150,18 @@ vagrant ssh pg-node1 -c "sudo systemctl start patroni"
 
 ```
 .
-├── Vagrantfile
+├── Vagrantfile              # Defines VMs and auto-generates Ansible inventory
 ├── ansible/
-│   ├── inventory.ini
-│   ├── playbook.yml
+│   ├── ansible.cfg          # SSH and host key settings
+│   ├── playbook.yml         # Main provisioning playbook
 │   └── templates/
 │       ├── etcd.service.j2
 │       ├── patroni.yml.j2
 │       └── patroni.service.j2
 └── README.md
 ```
+
+> **Note**: Vagrant automatically generates the Ansible inventory file at `.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory` during provisioning.
 
 ## Troubleshooting
 

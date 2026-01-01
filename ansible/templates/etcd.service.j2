@@ -11,10 +11,10 @@ TimeoutStartSec=0
 ExecStart=/usr/local/bin/etcd \
   --name {{ inventory_hostname }} \
   --data-dir /var/lib/etcd \
-  --initial-advertise-peer-urls http://{{ ansible_host }}:2380 \
+  --initial-advertise-peer-urls http://{{ node_ip }}:2380 \
   --listen-peer-urls http://0.0.0.0:2380 \
-  --listen-client-urls http://{{ ansible_host }}:2379,http://127.0.0.1:2379 \
-  --advertise-client-urls http://{{ ansible_host }}:2379 \
+  --listen-client-urls http://{{ node_ip }}:2379,http://127.0.0.1:2379 \
+  --advertise-client-urls http://{{ node_ip }}:2379 \
   --initial-cluster-token pg-etcd-cluster \
   --initial-cluster {{ etcd_initial_cluster }} \
   --initial-cluster-state new \

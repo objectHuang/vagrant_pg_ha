@@ -9,9 +9,9 @@
     patroni_scope: "pg-cluster"
     etcd_version: "v3.5.11"
     
-    # Generate cluster info from inventory
-    etcd_initial_cluster: "{{ groups['pg_cluster'] | map('extract', hostvars, ['inventory_hostname']) | zip(groups['pg_cluster'] | map('extract', hostvars, ['ansible_host'])) | map('join', '=http://') | map('regex_replace', '$', ':2380') | join(',') }}"
-    etcd_endpoints: "{{ groups['pg_cluster'] | map('extract', hostvars, ['ansible_host']) | map('regex_replace', '$', ':2379') | join(',') }}"
+    # Generate cluster info from inventory (using node_ip from Vagrant host_vars)
+    etcd_initial_cluster: "{{ groups['pg_cluster'] | map('extract', hostvars, ['inventory_hostname']) | zip(groups['pg_cluster'] | map('extract', hostvars, ['node_ip'])) | map('join', '=http://') | map('regex_replace', '$', ':2380') | join(',') }}"
+    etcd_endpoints: "{{ groups['pg_cluster'] | map('extract', hostvars, ['node_ip']) | map('regex_replace', '$', ':2379') | join(',') }}"
 
   tasks:
     # ==================== Phase 1: Install packages on ALL nodes ====================

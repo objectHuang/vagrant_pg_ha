@@ -5,6 +5,7 @@
 # Using Ansible for provisioning
 #
 # USAGE: Just run "vagrant up"
+# Vagrant automatically generates the Ansible inventory
 
 CLUSTER_CONFIG = {
   :nodes => [
@@ -37,11 +38,17 @@ Vagrant.configure("2") do |config|
       if is_last_node
         node_config.vm.provision "ansible" do |ansible|
           ansible.playbook = "ansible/playbook.yml"
-          ansible.inventory_path = "ansible/inventory.ini"
           ansible.limit = "all"
+          
+          # Vagrant auto-generates inventory, we just define groups and host_vars
           ansible.groups = {
             "pg_cluster" => CLUSTER_CONFIG[:nodes].map { |n| n[:name] }
           }
+          
+          # Pass node IPs as host_vars (Vagrant will include in auto-generated inventory)
+          ansible.host_vars = CLUSTER_CONFIG[:nodes].map { |n|
+            [n[:name], { "node_ip" => n[:ip] }]
+          }.to_h
         end
       end
     end

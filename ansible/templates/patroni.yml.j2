@@ -3,8 +3,8 @@ namespace: /postgresql/
 name: {{ inventory_hostname }}
 
 restapi:
-  listen: {{ ansible_host }}:8008
-  connect_address: {{ ansible_host }}:8008
+  listen: {{ node_ip }}:8008
+  connect_address: {{ node_ip }}:8008
 
 etcd:
   hosts: {{ etcd_endpoints }}
@@ -50,8 +50,8 @@ bootstrap:
         - replication
 
 postgresql:
-  listen: {{ ansible_host }}:5432
-  connect_address: {{ ansible_host }}:5432
+  listen: {{ node_ip }}:5432
+  connect_address: {{ node_ip }}:5432
   data_dir: /var/lib/patroni/{{ patroni_scope }}
   bin_dir: /usr/lib/postgresql/{{ pg_version }}/bin
   pgpass: /var/lib/postgresql/.pgpass
